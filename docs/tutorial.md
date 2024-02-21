@@ -11,7 +11,7 @@
 This repository is a GenePattern module written in [Python 3](https://www.python.org/download/releases/3.0/).
 
 
-It processes files into DataFrames and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of cross-validation) on them using <ins>rapidsAI cuML's</ins> [RandomForestClassifier](https://docs.rapids.ai/api/cuml/stable/api/#cuml.ensemble.RandomForestClassifier), generating an accuracy score, a prediction results file (.pred.odf) that compares the "true" class to the model's prediction, and a feature importance file in the case of test-train prediction that uses a training dataset. Created for module usage through optional arguments for classifier parameters.
+It processes files into DataFrames and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of cross-validation) on them using rapidsAI cuML's [RandomForestClassifier](https://docs.rapids.ai/api/cuml/stable/api/#cuml.ensemble.RandomForestClassifier), generating an accuracy score, a prediction results file (.pred.odf) that compares the "true" class to the model's prediction, and a feature importance file in the case of test-train prediction that uses a training dataset. Created for module usage through optional arguments for classifier parameters.
 
 
 ## Source Links
