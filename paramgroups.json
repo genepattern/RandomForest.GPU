@@ -57,7 +57,7 @@
             "min_samples_split",
             "n_estimators",
             "n_bins",
-            "random_state",
+            "random_seed",
             "max_batch_size"
         ]
     },
