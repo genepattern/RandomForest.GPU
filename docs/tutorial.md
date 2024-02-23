@@ -1,6 +1,6 @@
 # Random Forest
 
-**Description**: The following is a GenePattern module written in Python 3. It performs [random forest classification](/docs/randomforest.md) by either <ins>cross-validation</ins> (takes one dataset as input, done through LOOCV, [leave-one-out cross validation](/docs/randomforest.md#leave-one-out-cross-validation)) or <ins>test-train prediction</ins> (takes two datasets, test and train). Each dataset consists of two file inputs, one for feature data (.gct), and one for target data (.cls). It uses rapidsAI cuML's RandomForestClassifier (v22.08). Also includes several optional parameters for specifying the classification algorithm process.
+**Description**: The following is a GenePattern module that performs [random forest classification](/docs/randomforest.md), an _ensemble_ machine learning algorithm which utilizes the outputs from a collection of decision trees (hence, "forest") to answer a classification problem. In essence, after providing several samples, each with a corresponding class and set of feature values, the algorithm tells you what class a new sample "X" likely belongs to. The module runs either <ins>cross-validation</ins> (takes one dataset as input, done through LOOCV, [leave-one-out cross validation](/docs/randomforest.md#leave-one-out-cross-validation)) or <ins>test-train prediction</ins> (takes two datasets, test and train). Each dataset consists of two file inputs, one for feature data (.gct), and one for target data (.cls). It is written in [Python 3](https://www.python.org/download/releases/3.0/) and uses [rapidsAI cuML's RandomForestClassifier](v22.08) (v22.08). Also includes several optional parameters for specifying the classification algorithm process as well as options for importing and exporting trained models.
 
 **Author**: Omar Halawa, GenePattern Team @ Mesirov Lab - UCSD
 
@@ -8,11 +8,7 @@
 
 ## Summary
 
-This repository is a GenePattern module written in [Python 3](https://www.python.org/download/releases/3.0/).
-
-
-It processes files into DataFrames and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of cross-validation) on them using rapidsAI cuML's [RandomForestClassifier](https://docs.rapids.ai/api/cuml/stable/api/#cuml.ensemble.RandomForestClassifier), generating an accuracy score, a prediction results file (.pred.odf) that compares the "true" class to the model's prediction, and a feature importance file in the case of test-train prediction that uses a training dataset. Created for module usage through optional arguments for classifier parameters.
-
+The module processes files and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of one dataset rather than test-train prediction used for two datasets) on them using rapidsAI cuML's [RandomForestClassifier](https://docs.rapids.ai/api/cuml/stable/api/#cuml.ensemble.RandomForestClassifier), generating a prediction results file (.pred.odf) that compares the "true" class to the model's prediction, and a feature importance file in the case of test-train prediction that uses a training dataset. It also includes options for importing and exporting trained model files as well as various parameters for the algorithm itself. Created for GenePattern module usage through optional arguments for classifier parameters.
 
 ## Source Links
 * [The GenePattern RandomForest-GPU source repository](/../../)
@@ -21,7 +17,7 @@ It processes files into DataFrames and performs random forest classification (us
 ## Usage
 For <ins>cross-validation</ins>, the module only requires one feature data file (.gct) and one target  data file (.cls). For <ins>test-train prediction</ins>, the module requires a testing dataset in the form of a testing feature (.gct) and testing target (.cls) data file **<ins>and</ins> either one of:** a fitted model pickle file or a training dataset (with a training feature (.gct) and training target (.cls) data file). Other parameters for classifier specifications are optional, maintaining default values if left unchanged (see below).
 
-## Usage Modes
+## Modes of Usage
 | Parameter Name | Cross-Validation | Test-Train Prediction (without model input) | Test-Train Prediction (with model input)
 ---------|--------------|----------------|----------------
 | train data file | ✔ | ✔ |  |
@@ -59,7 +55,7 @@ For <ins>cross-validation</ins>, the module only requires one feature data file 
 | min weight fraction leaf | Optional float for min weighted fraction of weight sum total to be leaf (between 0.0 and 0.5, inclusive for both) | 0.0 |
 | n estimators | Optional int for number of trees in forest (>= 1) | 100 |
 | oob score | Optional boolean for if out-of-bag samples used for generalization score; if bootstrap is False, can only be False | False |
-| random state | Optional int for seed of random number generator (nonnegative, caps at 4294967295, 2<sup>32</sup> - 1), also takes None. Note: Setting this to a specific integer, like 0 for example, for a specific dataset, will always yield the same prediction results file as this argument controls how bagging and random feature selection for a specific dataset occur.| None |
+| random seed | Optional int for seed of random number generator (nonnegative, caps at 4294967295, 2<sup>32</sup> - 1), also takes None. Note: Setting this to a specific integer, like 0 for example, for a specific dataset, will always yield the same prediction results file as this argument controls how bagging and random feature selection for a specific dataset occur.| None |
 | debug | Optional boolean for program debugging | False |
 | verbose | Optional int (0 = no verbose, 1 = base verbosity) to increase classifier verbosity (non-negative), [more info](https://scikit-learn.org/stable/glossary.html#term-verbose) (for other input values) | 0 |
 
