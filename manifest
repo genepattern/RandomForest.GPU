@@ -1,12 +1,12 @@
 #RandomForest.GPU
-#Fri Jan 19 13:43:38 PST 2024
+#Fri Feb 23 14:19:15 PST 2024
 JVMLevel=
 LSID=urn\:lsid\:8080.genepattern.genepattern.sdsc.edu\:genepatternmodules\:1\:2
 author=Omar Halawa;GenePattern Team @ Mesirov Lab - UCSD
 categories=prediction
-commandLine=/expanse/projects/mesirovlab/genepattern/modules/RandomForest-GPU-v1/runitprod.bash <train.data.file> <train.class.file> <model.output> <model.output.filename> <test.data.file> <test.class.file> <prediction.results.filename> <feature.importance.filename> <model.input.file> <bootstrap> <split_criterion> <max_depth> <max_features> <max_leaves> <max_samples> <min_impurity_decrease> <min_samples_leaf> <min_samples_split> <n_estimators> <random_state> <verbose> <debug> <max_batch_size> <n_bins> --n_stream\=<job.cpuCount> 
+commandLine=/expanse/projects/mesirovlab/genepattern/modules/RandomForest-GPU-v1/runitprod.bash <train.data.file> <train.class.file> <model.output> <model.output.filename> <test.data.file> <test.class.file> <prediction.results.filename> <feature.importance.filename> <model.input.file> <bootstrap> <split_criterion> <max_depth> <max_features> <max_leaves> <max_samples> <min_impurity_decrease> <min_samples_leaf> <min_samples_split> <n_estimators> <random_seed> <verbose> <debug> <max_batch_size> <n_bins> --n_stream\=<job.cpuCount> 
 cpuType=any
-description=Performs random forest classification on data and class files (cross-validation or test-train prediction), outputting a prediction results file. 
+description=GPU-backed implementation to perform random forest classification (cross-validation or test-train prediction), outputting prediction results (and feature importance for test-train mode with datasets). It uses the CuPy implementation which might be faster compared to regular RandomForest.
 documentationUrl=https\://github.com/genepattern/RandomForest-GPU/blob/main/docs/tutorial.md
 fileFormat=.pred.odf
 job.cpuCount=
@@ -169,11 +169,11 @@ p1_type=java.io.File
 p1_value=
 p20_MODE=
 p20_TYPE=Integer
-p20_default_value=None
-p20_description=Optional int for seed of random number generator.\n\nPossible input range is non-negative ints (caps at 4294967295, 2^32 - 1). \nDefault value is None.\nNote\: Setting this to a specific integer for a specific dataset will NOT always yield the same prediction results file; see random_state in RAPIDS.ai documentation for more details.
+p20_default_value=
+p20_description=Optional int for seed of random number generator.\n\nPossible input range is non-negative ints (caps at 4294967295, 2^32 - 1). \nDefault value is None.\nNote\: Setting this to a specific integer for a specific dataset will NOT always yield the same prediction results file; see random_state in the <a href\=https\://docs.rapids.ai/api/cuml/stable/api/\#random-forest>RAPIDS.ai documentation</a> for more details.
 p20_fileFormat=
 p20_flag=--random_state\=
-p20_name=random_state
+p20_name=random_seed
 p20_numValues=0..1
 p20_optional=on
 p20_prefix=--random_state\=
@@ -211,7 +211,7 @@ p22_value=False\=False;True\=True
 p23_MODE=
 p23_TYPE=Integer
 p23_default_value=0
-p23_description=Optional int (0 \= no verbose, 1 \= base verbosity) to increase classifier verbosity. For other values, see Scikit documentation linked above.\n\nPossible input range is non-negative ints.\nDefault value is 0.\n
+p23_description=Optional int (0 \= no verbose, 1 \= base verbosity) to increase classifier verbosity. For other values, see <a href\=https\://docs.rapids.ai/api/cuml/stable/api/\#verbosity-levels>RAPIDS.ai documentation</a>.\n\nPossible input range is non-negative ints.\nDefault value is 0.
 p23_fileFormat=
 p23_flag=--verbose\=
 p23_name=verbose
@@ -316,7 +316,7 @@ p7_value=
 p8_MODE=
 p8_TYPE=TEXT
 p8_default_value=model.feat.odf
-p8_description=Classifier feature importance filename; only outputted for test-train prediction that uses a training dataset and NOT a model input file (.feat.odf, follows GenePattern ODF format). Default is model.feat.odf. See documentation for more details.
+p8_description=Classifier feature importance filename; only outputted for test-train prediction that uses a training dataset and NOT a model input file (.feat.odf, follows GenePattern ODF format). Default is model.feat.odf. See <a href\=https\://github.com/genepattern/RandomForest-GPU/blob/develop/docs/tutorial.md\#parameters>documentation</a> for more details.
 p8_fileFormat=
 p8_flag=--feat_odf\=
 p8_name=feature.importance.filename
