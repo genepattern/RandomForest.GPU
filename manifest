@@ -1,5 +1,5 @@
 #RandomForest.GPU
-#Fri Feb 23 14:19:15 PST 2024
+#Fri Feb 23 22:23:30 UTC 2024
 JVMLevel=
 LSID=urn\:lsid\:8080.genepattern.genepattern.sdsc.edu\:genepatternmodules\:1\:2
 author=Omar Halawa;GenePattern Team @ Mesirov Lab - UCSD
@@ -339,7 +339,7 @@ p9_prefix=--bootstrap\=
 p9_prefix_when_specified=--bootstrap\=
 p9_type=java.lang.String
 p9_value=True\=True;False\=False
-privacy=private
+privacy=public
 publicationDate=05/17/2023 15\:32 
 quality=preproduction
 requiredPatchLSIDs=
