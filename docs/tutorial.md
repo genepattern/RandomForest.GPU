@@ -10,7 +10,7 @@
 
 The module processes files and performs random forest classification (uses LOOCV (leave-one-out cross validation) in the case of one dataset rather than test-train prediction used for two datasets) on them, generating a prediction results file (.pred.odf) that compares the "true" class to the model's prediction, and a feature importance file in the case of test-train prediction that uses a training dataset. It also includes options for importing and exporting trained model files as well as various parameters for the algorithm itself. Created for GenePattern module usage through optional arguments for classifier parameters.
 
-It is written in [Python 3](https://www.python.org/download/releases/3.0/) and uses rapidsAI cuML's [RandomForestClassifier](https://docs.rapids.ai/api/cuml/stable/api/#cuml.ensemble.RandomForestClassifier).
+It is written in [Python 3](https://www.python.org/download/releases/3.0/) and uses rapidsAI cuML's [RandomForestClassifier](https://docs.rapids.ai/api/cuml/stable/api/#cuml.ensemble.RandomForestClassifier) (v22.08).
 
 ## Source Links
 * [The GenePattern RandomForest-GPU source repository](/../../)
